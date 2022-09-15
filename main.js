@@ -23,7 +23,7 @@ module.exports.loop = function () {
     // }
     taskAutoSpawn.run('harvester', 2);
     taskAutoSpawn.run('upgrader', 2);
-    taskAutoSpawn.run('builder', 1);
+    taskAutoSpawn.run('builder', 5);
 
     if(Game.spawns['Spawn1'].spawning) {
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];

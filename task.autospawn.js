@@ -8,11 +8,11 @@ var taskAutoSpawn = {
       // console.log('Spawn1 busy');
       return;
     } else {
-      var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == role);
-      if (harvesters.length < maxnum) {
-        var newName = role + Game.time;
+      var creeps = _.filter(Game.creeps, (creep) => creep.memory.role == role);
+      if (creeps.length < maxnum) {
+        var newName = 'worker' + Game.time;
         console.log('Spawning new ' + role + ": " + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName,
+        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, CARRY, MOVE], newName,
           { memory: { role: role } });
       }
     }
