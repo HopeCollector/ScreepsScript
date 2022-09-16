@@ -21,8 +21,8 @@ module.exports.loop = function () {
     //     Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
     //         {memory: {role: 'harvester'}});
     // }
-    taskAutoSpawn.run('harvester', 2);
-    taskAutoSpawn.run('upgrader', 2);
+    taskAutoSpawn.run('harvester', 3);
+    taskAutoSpawn.run('upgrader', 3);
     taskAutoSpawn.run('builder', 5);
 
     if(Game.spawns['Spawn1'].spawning) {
