@@ -18,9 +18,30 @@ var roleUpgrader = {
       }
     }
     else {
-      var sources = creep.room.find(FIND_SOURCES);
-      if (creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+      var targets = creep.room.find(FIND_STRUCTURES, {
+        filter: (obj) => {
+          return (obj.structureType == STRUCTURE_CONTAINER) && obj.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+        }
+      });
+      if (targets.length > 0) {
+        targets.sort((a, b) => {
+          var d_a = Math.abs(a.pos.x - creep.pos.x) + Math.abs(a.pos.y - creep.pos.y);
+          var d_b = Math.abs(b.pos.x - creep.pos.x) + Math.abs(a.pos.y - creep.pos.y);
+          return d_a - d_b;
+        });
+        if (creep.withdraw(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+        }
+      } else {
+        targets = creep.room.find(FIND_SOURCES);
+        targets.sort((a, b) => {
+          var d_a = Math.abs(a.pos.x - creep.pos.x) + Math.abs(a.pos.y - creep.pos.y);
+          var d_b = Math.abs(b.pos.x - creep.pos.x) + Math.abs(a.pos.y - creep.pos.y);
+          return d_a - d_b;
+        });
+        if (creep.harvest(targets[0]) == ERR_NOT_IN_RANGE) {
+          creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+        }
       }
     }
   }
